@@ -11,8 +11,8 @@ public class MysqlEmployees {
     private final String url = "jdbc:mysql://localhost:3306/";
     private final String dbName = "employees";
     private final String driver = "com.mysql.jdbc.Driver";
-    private final String userName2 = "anyone";
-    private final String password = "secret";
+    private final String userName2 = "---";
+    private final String password = "---";
     private Connection con;
 
     public List<String> getEmployees()

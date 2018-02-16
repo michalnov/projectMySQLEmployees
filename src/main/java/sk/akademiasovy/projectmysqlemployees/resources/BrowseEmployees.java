@@ -2,6 +2,7 @@ package sk.akademiasovy.projectmysqlemployees.resources;
 
 import sk.akademiasovy.projectmysqlemployees.db.MysqlEmployees;
 
+import javax.swing.text.html.HTMLDocument;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.awt.*;
@@ -12,7 +13,16 @@ import java.util.List;
 public class BrowseEmployees {
 
     @GET
-    @Path("/employees")
+    @Path("/")
+    @Produces(MediaType.TEXT_HTML)
+    public HTMLDocument home()
+    {
+        HTMLDocument result = new HTMLDocument();
+        return result;
+    }
+
+    @GET
+    @Path("/emploiees")
     @Produces(MediaType.APPLICATION_JSON)
     public String getEmployees()
     {

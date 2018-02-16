@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <script type="text/javascript" src="source/jquery-3.2.1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onload="requireEmploiees()">
+<div id="content">
+    <select id="employeesList" onchange="requireSalary">
+        <option value="non">--non--</option>
+    </select>
+    <div id="salary">
+      <p style=""> Salary: <span id="result"></span> </p>
+    </div>
+</div>
+<script>
+function requireEmploiees(){
+      var urllink= 'http://localhost:8080/read/emploiees/';
+      $.ajax({
+          url: urllink,
+          data: {},
+          error: function(data){console.log("NIE");},
+          success: resultEmployees,
+          crossDomain: true,
+          dataType: 'jsonp',
+          jsonpCallback: 'resultEmployees',
+            contentType: 'application/json',
+            type: "GET"
+       });
+	}
+  function resultEmployees(data) {
+    data.emp.forEach(function(element) {
+      $('#employeesList').append( '<option value="'+element.id+'">'+element.name+'</option>' );
+    });
+  }
+
+  function requireSalary() {
+    var selected = $("#employeesList").val();
+    if (selected == "non") {
+      document.getElementById("result").innerHTML = "";
+      return;
+    }
+    var urllink= 'http://localhost:8080/read/salary/'+selected;
+    $.ajax({
+        url: urllink,
+        data: {},
+        error: function(data){console.log("NIE");},
+        success: resultSalary,
+        crossDomain: true,
+        dataType: 'jsonp',
+        jsonpCallback: 'resultSalary',
+          contentType: 'application/json',
+          type: "GET"
+     });
+  }
+
+  function resultSalary(data) {
+    document.getElementById("result").innerHTML = data.sal.salary;
+  }
+</script>
+</body>
+</html>
