@@ -13,16 +13,7 @@ import java.util.List;
 public class BrowseEmployees {
 
     @GET
-    @Path("/")
-    @Produces(MediaType.TEXT_HTML)
-    public HTMLDocument home()
-    {
-        HTMLDocument result = new HTMLDocument();
-        return result;
-    }
-
-    @GET
-    @Path("/emploiees")
+    @Path("/employees")
     @Produces(MediaType.APPLICATION_JSON)
     public String getEmployees()
     {
@@ -33,19 +24,20 @@ public class BrowseEmployees {
             MysqlEmployees mySQL = new MysqlEmployees();
             res = mySQL.getEmployees();
 
-            int i = 0;
+            boolean i = false;
             for (String swap: res) {
-                if (i==0)
+                if (i == false)
                 {
-                    result = "resultEmployees({\"emp\"[";
-                    result += "\""+ swap +"\"";
+                    result = "resultEmployees({\"emp\":[";
+                    result = result +swap;
+                    i = true;
                 }
                 else
                 {
-                    result += ",\""+ swap +"\"";
+                    result = result + ","+ swap;
                 }
             }
-            result += "]})";
+            result = result + "]})";
 
         }
         catch (Exception e){
@@ -66,19 +58,20 @@ public class BrowseEmployees {
             MysqlEmployees mySQL = new MysqlEmployees();
             res = mySQL.getSalary(id);
 
-            int i = 0;
+            boolean i = false;
             for (String swap: res) {
-                if (i==0)
+                if (i == false)
                 {
-                    result = "resultSalary({\"sal\"[";
-                    result += "\""+ swap +"\"";
+                    result = "resultSalary(";
+                    result +=  swap;
+                    i = true;
                 }
                 else
                 {
-                    result += ",\""+ swap +"\"";
+                    result += ","+ swap;
                 }
             }
-            result += "]})";
+            result += ")";
 
         }
         catch (Exception e){

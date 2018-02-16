@@ -6,13 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class MysqlEmployees {
     private final String url = "jdbc:mysql://localhost:3306/";
     private final String dbName = "employees";
     private final String driver = "com.mysql.jdbc.Driver";
-    private final String userName2 = "---";
-    private final String password = "---";
+    private final String userName2 = "root";
+    private final String password = "";
     private Connection con;
 
     public List<String> getEmployees()
@@ -27,9 +28,10 @@ public class MysqlEmployees {
             String swap = "";
             ObjEmployee employee = new ObjEmployee();
             while(resultSet.next()){
-                employee.setFirstName(resultSet.getNString("first_name"));
-                employee.setLastName(resultSet.getNString("last_name"));
-                employee.setId(resultSet.getNString("emp_no"));
+                System.out.println(resultSet.getString("gender"));
+                employee.setFirstName(resultSet.getString("first_name"));
+                employee.setLastName(resultSet.getString("last_name"));
+                employee.setId(resultSet.getString("emp_no"));
                 swap = employee.createString();
                 res.add(swap);
             }
@@ -53,10 +55,10 @@ public class MysqlEmployees {
             String swap = "";
             ObjSalary salary = new ObjSalary();
             while(resultSet.next()){
-                salary.setId(resultSet.getNString("emp_no"));
-                salary.setSalary(resultSet.getNString("salary"));
-                salary.setFrom_date(resultSet.getNString("from_date"));
-                salary.setTo_date(resultSet.getNString("to_date"));
+                salary.setId(resultSet.getString("emp_no"));
+                salary.setSalary(resultSet.getString("salary"));
+                salary.setFrom_date(resultSet.getString("from_date"));
+                salary.setTo_date(resultSet.getString("to_date"));
                 swap = salary.createString();
                 res.add(swap);
             }
