@@ -13,7 +13,7 @@ public class MysqlEmployees {
     private final String dbName = "employees";
     private final String driver = "com.mysql.jdbc.Driver";
     private final String userName2 = "root";
-    private final String password = "";
+    private final String password = "sql+17";
     private Connection con;
 
     public List<String> getEmployees()
